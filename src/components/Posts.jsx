@@ -20,7 +20,6 @@ export const Posts = ({ setId, userId }) => {
     fetchPostData();
   }, [userId,query]);
   
-   console.log(query)
   const handleNext = () => {
     if (end < 100) {
       setStart((preVal) => preVal + 10);

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Loading from "./Loading";
 
 const Comments = ({ id }) => {
+  const [query, setQuery] = useState("")
   const [commentData, setCommentData] = useState();
 
   const fetchCommentData = async () => {
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/comments?postId=${id}`
+      `https://jsonplaceholder.typicode.com/posts/${id}/comments?q=${query}`
     );
     const data = await response.json();
     setCommentData(data);
@@ -14,10 +15,22 @@ const Comments = ({ id }) => {
 
   useEffect(() => {
     fetchCommentData();
-  }, [id]);
+  }, [id,query]);
+
+  const handleSearchQuery = (e)=>{
+    setQuery(e.target.value)
+  }
 
   return (
     <div className="comments_container">
+      <div className="search_container">
+        <input
+          type="text"
+          placeholder="Search query"
+          onChange={(e) => handleSearchQuery(e)}
+        />
+      </div>
+
       <table>
         <thead>
           <tr>
