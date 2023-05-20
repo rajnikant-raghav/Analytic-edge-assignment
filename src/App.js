@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from "react";
+import Posts from "./components/Posts";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Comments from "./components/Comments";
+import User from "./components/User";
 
-function App() {
+
+export const App = () => {
+  const [id, setId] = useState(1)
+  const [userId, setUserId] = useState(1)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<User setUserId={setUserId}/>} />
+          <Route path="/posts" element={<Posts userId={userId} setId={setId} />} />
+          <Route path="/comments" element={<Comments id={id} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
-
+};
 export default App;
